@@ -6,6 +6,61 @@ import type { IFS } from 'unionfs';
 
 type FileSystem = IFS | Volume;
 
+export async function mirror(
+    source: fs.PathLike,
+    destination: fs.PathLike,
+    fileSystem: FileSystem,
+): Promise<void> {
+    ufs.use(fs).use(fileSystem as IFS);
+
+    const directoryContents = await new Promise<string[] | Buffer[]>(
+        (resolve, reject) =>
+            ufs.readdir(source, {}, (err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            }),
+    );
+
+    return new Promise((resolve, reject) => {
+        for (let item of directoryContents) {
+            item = item.toString();
+
+            // Ignore this and parent directories
+            if (/^\.\.?$/.test(item)) continue;
+
+            // Get the absolute path to the item
+            const itemPath = path.join(source.toString(), item);
+
+            // Ignore directories - they'll be handled during the file writing
+            ufs.stat(itemPath, (err, itemStat) => {
+                if (err) reject(err);
+                if (!itemStat.isFile()) return;
+
+                // Get the file contents
+                ufs.readFile(
+                    itemPath,
+                    {
+                        encoding: 'utf8',
+                    },
+                    (err, contents) => {
+                        if (err) reject(err);
+
+                        // Write the contents to disk
+                        const destinationPath = path.join(
+                            destination.toString(),
+                            item,
+                        );
+                        ufs.writeFile(destinationPath, contents, (err) => {
+                            if (err) reject(err);
+                            resolve();
+                        });
+                    },
+                );
+            });
+        }
+    });
+}
+
 export function mirrorSync(
     source: fs.PathLike,
     destination: fs.PathLike,
