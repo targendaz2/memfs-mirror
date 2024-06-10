@@ -1,6 +1,6 @@
 {
   "name": "memfs-mirror",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Copies an in-memory file system created using memfs or unionfs to a local file system.",
   "type": "module",
   "packageManager": "yarn@4.2.2",
@@ -34,7 +34,6 @@
     "test": "NODE_OPTIONS=\"--experimental-vm-modules\" NODE_NO_WARNINGS=1 jest"
   },
   "dependencies": {
-    "memfs": "^4.9.2",
     "unionfs": "^4.5.4"
   },
   "devDependencies": {
@@ -49,6 +48,7 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
+    "memfs": "^4.9.2",
     "prettier": "^3.3.1",
     "tmp": "^0.2.3",
     "ts-jest": "^29.1.4",
