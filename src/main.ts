@@ -1,3 +1,35 @@
-export function mirror(source: string, destination: string) {
-    return `${source} -> ${destination}`;
+import fs from 'node:fs';
+import path from 'node:path';
+import type { Volume } from 'memfs/lib/volume.js';
+import { ufs } from 'unionfs';
+import type { IFS } from 'unionfs';
+
+type FileSystem = IFS | Volume;
+
+export function mirrorSync(
+    source: fs.PathLike,
+    destination: fs.PathLike,
+    fileSystem: FileSystem,
+): void {
+    ufs.use(fs).use(fileSystem as IFS);
+    const directoryContents = ufs.readdirSync(source);
+
+    for (const item of directoryContents) {
+        // Ignore this and parent directories
+        if (/^\.\.?$/.test(item)) continue;
+
+        // Get the absolute path to the item
+        const itemPath = path.join(source.toString(), item);
+
+        // Ignore directories - they'll be handled during the file writing
+        const itemStat = ufs.statSync(itemPath);
+        if (!itemStat.isFile()) continue;
+
+        // Get the file contents
+        const contents = ufs.readFileSync(itemPath, { encoding: 'utf8' });
+
+        // Write the contents to disk
+        const destinationPath = path.join(destination.toString(), item);
+        ufs.writeFileSync(destinationPath, contents);
+    }
 }

@@ -25,7 +25,8 @@
     "test": "NODE_OPTIONS=\"--experimental-vm-modules\" NODE_NO_WARNINGS=1 jest"
   },
   "dependencies": {
-    "tar-stream": "^3.1.7"
+    "memfs": "^4.9.2",
+    "unionfs": "^4.5.4"
   },
   "devDependencies": {
     "@eslint/js": "^8.56.0",
@@ -35,23 +36,16 @@
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.14.2",
-    "@types/tar-stream": "^3",
+    "@types/tmp": "^0.2.6",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
     "prettier": "^3.3.1",
+    "tmp": "^0.2.3",
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.12.0"
-  },
-  "peerDependencies": {
-    "memfs": "^4.9.2"
-  },
-  "peerDependenciesMeta": {
-    "memfs": {
-      "optional": false
-    }
   },
   "engines": {
     "node": "^21.0.0"
