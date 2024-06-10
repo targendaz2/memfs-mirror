@@ -22,6 +22,33 @@ describe('asynchronous mirroring tests', () => {
         });
         expect(contents).toBe('Hello, world!');
     });
+
+    test('can mirror nested file system', async () => {
+        vol.fromJSON(
+            {
+                './file1.txt': 'Hello, world!',
+                './sub/file2.txt': 'Hello, sub-file!',
+            },
+            '/memfs-mirror-test',
+        );
+
+        const tmpDir = tmp.dirSync();
+
+        await mirror('/memfs-mirror-test', tmpDir.name, vol);
+
+        const contents1 = fs.readFileSync(path.join(tmpDir.name, 'file1.txt'), {
+            encoding: 'utf8',
+        });
+        expect(contents1).toBe('Hello, world!');
+
+        const contents2 = fs.readFileSync(
+            path.join(tmpDir.name, 'sub', 'file2.txt'),
+            {
+                encoding: 'utf8',
+            },
+        );
+        expect(contents2).toBe('Hello, sub-file!');
+    });
 });
 
 describe('synchronous mirroring tests', () => {
