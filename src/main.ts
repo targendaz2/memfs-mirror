@@ -67,9 +67,13 @@ export function mirrorSync(
     fileSystem: FileSystem,
 ): void {
     ufs.use(fs).use(fileSystem as IFS);
-    const directoryContents = ufs.readdirSync(source);
+    const directoryContents = ufs.readdirSync(source, {
+        recursive: true,
+    });
 
-    for (const item of directoryContents) {
+    for (let item of directoryContents) {
+        item = item.toString();
+
         // Ignore this and parent directories
         if (/^\.\.?$/.test(item)) continue;
 
@@ -84,7 +88,12 @@ export function mirrorSync(
         const contents = ufs.readFileSync(itemPath, { encoding: 'utf8' });
 
         // Write the contents to disk
-        const destinationPath = path.join(destination.toString(), item);
-        ufs.writeFileSync(destinationPath, contents);
+        const destinationFilePath = path.join(destination.toString(), item);
+        const destinationDirPath = path.dirname(destinationFilePath);
+
+        if (!ufs.existsSync(destinationDirPath)) {
+            ufs.mkdirSync(destinationDirPath);
+        }
+        ufs.writeFileSync(destinationFilePath, contents);
     }
 }
