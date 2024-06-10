@@ -8,10 +8,16 @@
         "*.config.ts",
         "*.json",
         "*.md",
-        "*.yml",
         ".markdownlintrc"
       ],
       "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": ["*.yml"],
+      "options": {
+        "singleQuote": false,
         "tabWidth": 2
       }
     }

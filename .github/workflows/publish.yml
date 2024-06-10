@@ -19,16 +19,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '21.x'
+          node-version: "21.x"
           cache: yarn
           cache-dependency-path: yarn.lock
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
         run: yarn install --immutable
-
-      - name: Build the package
-        run: yarn pack
 
       - name: Publish the package
         run: yarn npm publish

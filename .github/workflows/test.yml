@@ -1,6 +1,10 @@
 name: tests
 
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
@@ -19,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '21.x'
+          node-version: "21.x"
           cache: yarn
           cache-dependency-path: yarn.lock
 
