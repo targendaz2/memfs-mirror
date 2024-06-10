@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/targendaz2/memfs-mirror/issues"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "files": [
     "dist/"
   ],
@@ -46,6 +46,18 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.12.0"
+  },
+  "peerDependencies": {
+    "memfs": "^4.9.2",
+    "unionfs": "^4.5.4"
+  },
+  "peerDependenciesMeta": {
+    "memfs": {
+      "optional": true
+    },
+    "unionfs": {
+      "optional": true
+    }
   },
   "engines": {
     "node": "^21.0.0"
