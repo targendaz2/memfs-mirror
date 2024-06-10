@@ -4,9 +4,6 @@ on: [push]
 
 jobs:
   test:
-    permissions:
-      checks: write
-
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
