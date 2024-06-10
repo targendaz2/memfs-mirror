@@ -3456,6 +3456,14 @@ __metadata:
     typescript: "npm:^5.4.5"
     typescript-eslint: "npm:^7.12.0"
     unionfs: "npm:^4.5.4"
+  peerDependencies:
+    memfs: ^4.9.2
+    unionfs: ^4.5.4
+  peerDependenciesMeta:
+    memfs:
+      optional: true
+    unionfs:
+      optional: true
   languageName: unknown
   linkType: soft
 
