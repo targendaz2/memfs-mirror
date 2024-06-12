@@ -1,6 +1,12 @@
 {
   "version": "0.2",
-  "ignorePaths": ["*.lock", ".prettierrc*", ".vscode/*", "node_modules/"],
+  "ignorePaths": [
+    "*.lock",
+    ".prettierrc*",
+    ".devcontainer/",
+    ".vscode/*",
+    "node_modules/"
+  ],
   "dictionaryDefinitions": [],
   "dictionaries": ["misc", "node", "npm", "typescript"],
   "words": ["dgrdev", "memfs", "unionfs"],

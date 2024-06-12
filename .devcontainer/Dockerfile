@@ -1,0 +1,37 @@
+FROM node:22-slim
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# Install dependencies
+RUN --mount=type=cache,target=/var/cache/apt/install \
+    apt-get update && \
+    apt-get -y install --no-install-recommends \
+    curl git gnupg2 wget zsh
+
+# Install Yarn
+RUN --mount=type=cache,target=/var/cache/yarn \
+    npm install -g corepack && \
+    corepack enable && \
+    yarn set version stable
+
+# Enable shell history between sessions
+RUN --mount=type=cache,target=/var/cache/commandhistory \
+    mkdir /commandhistory && \
+    touch /commandhistory/.zsh_history && \
+    chown -R node /commandhistory
+
+USER node
+
+# Install and configure zsh
+RUN --mount=type=cache,target=/var/cache/oh-my-zsh \
+    sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.0/zsh-in-docker.sh)" -- \
+    -x \
+    -t robbyrussell \
+    -p debian \
+    -p git \
+    -p node \
+    -p yarn \
+    -a "zstyle ':omz:update' mode auto" \
+    -a "export PROMPT_COMMAND='history -a'" \
+    -a "export HISTFILE=/commandhistory/.zsh_history" \
+    -a "function gi() { curl -sLw \"\\\n\" https://www.toptal.com/developers/gitignore/api/\$@ ;}"
