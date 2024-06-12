@@ -1,9 +1,9 @@
 # memfs-mirror
 
 ![GitHub License](https://img.shields.io/github/license/targendaz2/memfs-mirror)
-![GitHub version](https://img.shields.io/github/package-json/v/targendaz2/memfs-mirror?label=version)
-![NPM version](https://img.shields.io/npm/v/memfs-mirror)
-![tests](https://github.com/targendaz2/memfs-mirror/actions/workflows/test.yml/badge.svg)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/targendaz2/memfs-mirror)
+![NPM Version](https://img.shields.io/npm/v/memfs-mirror?logo=npm&logoColor=%23999999)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/targendaz2/memfs-mirror/test.yml?logo=github&label=tests&logoColor=%23999999)
 
 This package copies an in-memory file system created using [memfs](https://npmjs.com/package/memfs) or [unionfs](https://npmjs.com/package/unionfs) to a local file system.
 
