@@ -20,6 +20,9 @@ RUN --mount=type=cache,target=/var/cache/commandhistory \
     touch /commandhistory/.zsh_history && \
     chown -R node /commandhistory
 
+# Set Zsh as default shell
+RUN usermod --shell /bin/zsh node
+
 USER node
 
 # Install and configure zsh
