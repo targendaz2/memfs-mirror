@@ -1,4 +1,4 @@
-name: Publish to npmjs
+name: Build and Publish to npmjs
 
 on:
   release:
