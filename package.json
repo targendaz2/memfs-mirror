@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Copies an in-memory file system created using memfs or unionfs to a local file system.",
   "type": "module",
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.3.0",
   "keywords": [
     "filesystem",
     "in-memory",
@@ -69,6 +69,6 @@
     }
   },
   "engines": {
-    "node": "^21.0.0"
+    "node": "^22.0.0"
   }
 }
