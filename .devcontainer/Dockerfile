@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN --mount=type=cache,target=/var/cache/apt/install \
     apt-get update && \
     apt-get -y install --no-install-recommends \
-    curl git gnupg2 wget zsh
+    ca-certificates curl git gnupg2 wget zsh
 
 # Install Yarn
 RUN --mount=type=cache,target=/var/cache/yarn \
