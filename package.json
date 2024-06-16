@@ -40,7 +40,7 @@
     "@eslint/js": "^8.56.0",
     "@jest/globals": "^29.7.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@tsconfig/node21": "^21.0.3",
+    "@tsconfig/node22": "^22.0.0",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.14.2",
