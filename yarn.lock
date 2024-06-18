@@ -2922,6 +2922,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-extended-fs@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "jest-extended-fs@npm:0.2.0"
+  dependencies:
+    "@jest/globals": "npm:^29.7.0"
+  peerDependencies:
+    jest: ^29.7.0
+  peerDependenciesMeta:
+    jest:
+      optional: false
+  checksum: 10c0/b0b54d862213013c53efe03e6f0a42b8825e6416d6769862442295cabfe3766e6ea7d68a498ebbe39b7da801977bab5463f618239dab6573b0632ede19e7b5ad
+  languageName: node
+  linkType: hard
+
 "jest-get-type@npm:^29.6.3":
   version: 29.6.3
   resolution: "jest-get-type@npm:29.6.3"
@@ -3448,6 +3462,7 @@ __metadata:
     eslint: "npm:^8.56.0"
     eslint-config-prettier: "npm:^9.1.0"
     jest: "npm:^29.7.0"
+    jest-extended-fs: "npm:^0.2.0"
     memfs: "npm:^4.9.2"
     prettier: "npm:^3.3.1"
     tmp: "npm:^0.2.3"

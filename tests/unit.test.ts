@@ -1,6 +1,6 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, test } from '@jest/globals';
+import 'jest-extended-fs';
 import { vol } from 'memfs';
 import tmp from 'tmp';
 import { mirror, mirrorSync } from '../src/main.js';
@@ -17,10 +17,8 @@ describe('asynchronous mirroring tests', () => {
         const tmpDir = tmp.dirSync();
 
         await mirror('/memfs-mirror-test', tmpDir.name, vol);
-        const contents = fs.readFileSync(path.join(tmpDir.name, 'file.txt'), {
-            encoding: 'utf8',
-        });
-        expect(contents).toBe('Hello, world!');
+        const filePath = path.join(tmpDir.name, 'file.txt');
+        expect(filePath).toBeAFileContaining('Hello, world!');
     });
 
     test('can mirror nested file system', async () => {
@@ -36,18 +34,11 @@ describe('asynchronous mirroring tests', () => {
 
         await mirror('/memfs-mirror-test', tmpDir.name, vol);
 
-        const contents1 = fs.readFileSync(path.join(tmpDir.name, 'file1.txt'), {
-            encoding: 'utf8',
-        });
-        expect(contents1).toBe('Hello, world!');
+        const filePath1 = path.join(tmpDir.name, 'file1.txt');
+        expect(filePath1).toBeAFileContaining('Hello, world!');
 
-        const contents2 = fs.readFileSync(
-            path.join(tmpDir.name, 'sub', 'file2.txt'),
-            {
-                encoding: 'utf8',
-            },
-        );
-        expect(contents2).toBe('Hello, sub-file!');
+        const filePath2 = path.join(tmpDir.name, 'sub', 'file2.txt');
+        expect(filePath2).toBeAFileContaining('Hello, sub-file!');
     });
 });
 
@@ -63,10 +54,8 @@ describe('synchronous mirroring tests', () => {
         const tmpDir = tmp.dirSync();
 
         mirrorSync('/memfs-mirror-test', tmpDir.name, vol);
-        const contents = fs.readFileSync(path.join(tmpDir.name, 'file.txt'), {
-            encoding: 'utf8',
-        });
-        expect(contents).toBe('Hello, world!');
+        const filePath = path.join(tmpDir.name, 'file.txt');
+        expect(filePath).toBeAFileContaining('Hello, world!');
     });
 
     test('can mirror nested file system', () => {
@@ -82,17 +71,10 @@ describe('synchronous mirroring tests', () => {
 
         mirrorSync('/memfs-mirror-test', tmpDir.name, vol);
 
-        const contents1 = fs.readFileSync(path.join(tmpDir.name, 'file1.txt'), {
-            encoding: 'utf8',
-        });
-        expect(contents1).toBe('Hello, world!');
+        const filePath1 = path.join(tmpDir.name, 'file1.txt');
+        expect(filePath1).toBeAFileContaining('Hello, world!');
 
-        const contents2 = fs.readFileSync(
-            path.join(tmpDir.name, 'sub', 'file2.txt'),
-            {
-                encoding: 'utf8',
-            },
-        );
-        expect(contents2).toBe('Hello, sub-file!');
+        const filePath2 = path.join(tmpDir.name, 'sub', 'file2.txt');
+        expect(filePath2).toBeAFileContaining('Hello, sub-file!');
     });
 });
